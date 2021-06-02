@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>FFF Battle</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="container mx-0" style="max-width: 100%;">
+
+    <div class="row">
+        <div class="col-12 border border-dark text-center">
+            <h2 id="solution">Solution</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 border border-dark text-center">
+            <h2 id="global_time">Global Time</h2>
+        </div>
+        <div class="col-6 border border-dark text-center">
+            <h2 id="ftl">First To Last</h2>
+        </div>
+    </div>
+</div>
+
+<!-- fill space here -->
+<div class="container bg-secondary mx-0" style="height: 500px; max-width: 100%;"></div>
+
+<!-- play area -->
+<div class="container mx-0" style="max-width: 100%;">
+    <div class="row">
+        <button class="col-12" onclick='restart()'>restart</button>
+
+    </div>
+    <div class="row">
+        <button class="col-6" onclick='letters("A")'>A</button>
+        <button class="col-6" onclick='letters("B")'>B</button>
+        <button class="col-6" onclick='letters("C")'>C</button>
+        <button class="col-6" onclick='letters("D")'>D</button>
+        <!-- <div class="col-6 text-light bg-dark border border-light text-center" onclick='clickHandler("A")'>
+            <h2>A</h2>
+        </div> -->
+        <!-- <div class="col-6 text-light bg-dark border border-light text-center">
+            <h2>B</h2>
+        </div>
+        <div class="col-6 text-light bg-dark border border-light text-center">
+            <h2>C</h2>
+        </div>
+        <div class="col-6 text-light bg-dark border border-light text-center">
+            <h2>D</h2>
+        </div> -->
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var solutionString = [];
+    var startTime;
+    var stopTime;
+
+
+    function letters(letter){
+        solutionString.push(letter)
+
+        pushArrayToSolution();
+
+        //if solutionString.length = 0{ get start time}
+        //if solutionstring.length = 4{get final time}
+        //if solutionstring.length = 4{done mode}
+
+        //add letters to solution area
+
+        console.log(letter);
+        console.log(solutionString);
+
+        if (solutionString.length == 1) {
+            startTimer(new Date().getTime());
+        }
+        if (solutionString.length == 4) {
+            stopTimer(new Date().getTime());
+        }
+
+    }
+
+    function startTimer(time){
+        startTime = time;
+    }
+    function stopTimer(time){
+        stopTime = time;
+
+        var diff = stopTime - startTime;
+
+        document.getElementById("ftl").innerHTML = diff/1000;
+        current_date = new Date();
+
+        var timeString = current_date.getMinutes() +":"+current_date.getSeconds() + ":"+ current_date.getMilliseconds();
+        // var timeString = "S: "+seconds;
+
+        // document.getElementById("global_time").innerHTML = stopTime;
+        document.getElementById("global_time").innerHTML = timeString;
+
+
+    }
+
+
+    function pushArrayToSolution(){
+        document.getElementById("solution").innerHTML = solutionString;
+    }
+
+    function restart(){
+        document.getElementById("solution").innerHTML = "Solution";
+        document.getElementById("global_time").innerHTML = "Global Time";
+        document.getElementById("ftl").innerHTML = "First To Last";
+
+        solutionString = [];
+    }
+
+
+</script>
+
+
+</body>
+</html>
